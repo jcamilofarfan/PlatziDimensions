@@ -13,6 +13,8 @@
   - [Requirements:](#requirements)
   - [Bonus points:](#bonus-points)
 - [Characteristics](#characteristics)
+  - [Player](#player)
+  - [Enemie](#enemie)
 - [Visual Style](#visual-style)
 - [Player Objectives](#player-objectives)
 
@@ -65,6 +67,22 @@
 - Al seguir la historia, el juego lo obliga a jugar con el humano y despues lo obliga a jugar con el monstruo.
 - Los humanos y monstruos tendran Barra de HP.
 - Que aparezca el damage del player al recibir dano y del enemigo al hacerle dano.
+
+## Player
+- Move with animations
+- Attack with animations
+- Target with mouse
+- Tunable attack speed
+- Freeze Attack
+- Multishot Attack
+- Health with bar
+- Attack Speed number
+- Damage taken numbers
+- Damage dealt numbers
+
+## Enemie
+- Move randomly
+- 
 
 # Visual Style
 Not defined yet

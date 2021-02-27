@@ -18,6 +18,7 @@ public class ArcherController : MonoBehaviour
     Rigidbody2D myRigidBody;
     Animator myAnimator;
     SpriteRenderer mySprite;
+    CapsuleCollider2D myCollider;
 
     // String const
     private const string horizontal = "Horizontal";
@@ -41,6 +42,7 @@ public class ArcherController : MonoBehaviour
         myRigidBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
+        myCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -63,10 +65,16 @@ public class ArcherController : MonoBehaviour
         myAnimator.SetBool(walkingState, playerIsWalking);
 
         if (xDirection < 0)
+        {
             mySprite.flipX = true;
+            myCollider.offset = new Vector2(0.3f, -0.4f);
+        }
 
         if (xDirection > 0)
+        {
             mySprite.flipX = false;
+            myCollider.offset = new Vector2(-0.3f, -0.4f);
+        }
 
         if (playerIsWalking)
         {
@@ -84,10 +92,12 @@ public class ArcherController : MonoBehaviour
         if (facingDirection.x < 0)
         {
             mySprite.flipX = true;
+            myCollider.offset = new Vector2(0.3f, -0.4f);
         }
         if (facingDirection.x > 0)
         {
             mySprite.flipX = false;
+            myCollider.offset = new Vector2(-0.3f, -0.4f);
         }
 
         if (Input.GetMouseButton(0) && arrowReady)
