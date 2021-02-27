@@ -9,8 +9,7 @@ public class ArcherController : MonoBehaviour
     [SerializeField] float runSpeed = 5f;
     [SerializeField] Transform aim;
     [SerializeField] GameObject arrow;
-    [Range(15f, 100f)] [SerializeField] float attackSpeed;
-    [SerializeField] AnimationClip attackAnimation;
+    [Range(0f, 1f)] [SerializeField] float attackSpeed;
 
     // State
     bool isAlive = true;
@@ -25,6 +24,7 @@ public class ArcherController : MonoBehaviour
     private const string vertical = "Vertical";
     private const string walkingState = "isWalking";
     private const string attackingState = "isAttacking";
+    private const string attackingSpeed = "AttackSpeed";
 
     // Initialize variables
     float xDirection;
@@ -49,8 +49,7 @@ public class ArcherController : MonoBehaviour
         if (!isAlive) { return; }
         Aim();
         Move();
-
-        //attackAnimation.frameRate = attackSpeed;
+        myAnimator.SetFloat(attackingSpeed, attackSpeed);
     }
 
     private void Move()
@@ -114,6 +113,8 @@ public class ArcherController : MonoBehaviour
 
     public void IncreaseAttackSpeed()
     {
-
+        if (attackSpeed < 1)
+            attackSpeed += 0.1f;
+        myAnimator.SetFloat(attackingSpeed, attackSpeed);
     }
 }

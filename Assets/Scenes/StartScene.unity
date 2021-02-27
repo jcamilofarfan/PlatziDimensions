@@ -363,8 +363,7 @@ MonoBehaviour:
   runSpeed: 5
   aim: {fileID: 1745644849}
   arrow: {fileID: 8640600757249624089, guid: a5f02b4df0ca1594a8ea838235331adb, type: 3}
-  attackSpeed: 15
-  attackAnimation: {fileID: 7400000, guid: 5ccb59336d2caaf408dba9f4305311c8, type: 2}
+  attackSpeed: 0
 --- !u!95 &1039372217
 Animator:
   serializedVersion: 3
