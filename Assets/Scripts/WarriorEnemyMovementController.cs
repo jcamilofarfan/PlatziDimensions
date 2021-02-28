@@ -5,22 +5,27 @@ using UnityEngine;
 public class WarriorEnemyMovementController : MonoBehaviour
 {
     // Config
-    [SerializeField] float enemySpeed = 1;
+    [Range(2f, 3f)] [SerializeField] float enemyWalkingSpeed = 2;
+    [Range(4f, 5f)] [SerializeField] float enemyRunningSpeed = 4;
     [SerializeField] float timeBetweenSteps;
     [SerializeField] float timeToMakeStep;
 
     // State
     private bool isMoving;
+    private bool isRunning;
+    public bool isAggroed;
 
     // Cached component references
     Rigidbody2D enemyRigidBody;
     SpriteRenderer enemySprite;
     Animator enemyAnimator;
+    GameObject player;
 
     // Initialize variables  
     float timeBetweenStepsCounter;
     float timeToMakeStepCounter;
     Vector2 directionToMakeStep;
+    Vector2 directionToRun;
 
     // String const
     private const string IS_MOVING = "isMoving";
@@ -33,6 +38,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
         enemyRigidBody = GetComponent<Rigidbody2D>();
         enemyAnimator = GetComponent<Animator>();
         enemySprite = GetComponent<SpriteRenderer>();
+        player = FindObjectOfType<ArcherPlayerController>().gameObject;
 
         timeBetweenStepsCounter = timeBetweenSteps * Random.Range(0.5f, 1.5f);
         timeToMakeStepCounter = timeToMakeStep * Random.Range(0.5f, 1.5f);
@@ -41,7 +47,33 @@ public class WarriorEnemyMovementController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        WalkingMovement();         
+        WalkingMovement();
+        RunningMovement();
+        AnimationChanges();
+    }
+
+    private void AnimationChanges()
+    {
+        enemyAnimator.SetBool(IS_RUNNING, isRunning);
+        enemyAnimator.SetBool(IS_MOVING, isMoving);
+    }
+
+    private void RunningMovement()
+    {
+        if (isAggroed && !enemyAnimator.GetBool(IS_ATTACKING))
+        {
+            isRunning = true;
+            directionToRun = (player.transform.position - transform.position).normalized;
+            enemyRigidBody.velocity = directionToRun * Time.deltaTime * enemyRunningSpeed * 30;
+            if (directionToRun.x < 0)
+                enemySprite.flipX = true;
+            else
+                enemySprite.flipX = false;     
+        }
+        else if (!isAggroed)
+        {
+            isRunning = false;
+        }        
     }
 
     private void WalkingMovement()
@@ -50,7 +82,6 @@ public class WarriorEnemyMovementController : MonoBehaviour
         {
             enemyRigidBody.constraints = RigidbodyConstraints2D.None;
             enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-            enemyAnimator.SetBool(IS_MOVING, isMoving);
             if (isMoving)
             {
                 timeToMakeStepCounter -= Time.deltaTime;
@@ -65,12 +96,12 @@ public class WarriorEnemyMovementController : MonoBehaviour
                 if (timeToMakeStepCounter < 0)
                 {
                     isMoving = false;
-                    timeBetweenStepsCounter = timeBetweenSteps;
-                    enemyRigidBody.velocity = Vector2.zero;
+                    timeBetweenStepsCounter = timeBetweenSteps;                  
                 }
             }
             else
             {
+                enemyRigidBody.velocity = Vector2.zero;
                 timeBetweenStepsCounter -= Time.deltaTime;
                 if (timeBetweenStepsCounter < 0)
                 {
@@ -79,13 +110,13 @@ public class WarriorEnemyMovementController : MonoBehaviour
 
                     do
                     {
-                        directionToMakeStep = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2)) * enemySpeed;
+                        directionToMakeStep = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2)) * enemyWalkingSpeed;
                     }
                     while (directionToMakeStep == Vector2.zero);
                 }
             }
         }
-        else
+        else if(!enemyAnimator.GetBool(IS_RUNNING))
         {
             enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
         }

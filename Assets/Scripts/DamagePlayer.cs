@@ -47,7 +47,7 @@ public class DamagePlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D otherCollider) //This only applies for the thrown weapons
     {
-        if (otherCollider.tag == "Player")
+        if (otherCollider.CompareTag("Player") && this.CompareTag("ObjectThrown"))
         {
             playerAnimator.SetTrigger(PLAYER_HIT);
 
