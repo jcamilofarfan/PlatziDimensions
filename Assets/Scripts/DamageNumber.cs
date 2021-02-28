@@ -9,6 +9,7 @@ public class DamageNumber : MonoBehaviour
     [SerializeField] float damageSpeed;
     [SerializeField] Text damageText;
 
+    // Start is called before the first frame update
     private void Start()
     {
         Destroy(gameObject, 1.5f);

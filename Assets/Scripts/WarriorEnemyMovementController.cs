@@ -31,6 +31,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
     private const string IS_MOVING = "isMoving";
     private const string IS_ATTACKING = "isAttacking";
     private const string IS_RUNNING = "isRunning";
+    private const string WILL_DIE = "willDie";
 
     // Start is called before the first frame update
     void Start()
@@ -62,17 +63,17 @@ public class WarriorEnemyMovementController : MonoBehaviour
     {
         try
         {
-            if (isAggroed && !enemyAnimator.GetBool(IS_ATTACKING))
+            if (isAggroed && !enemyAnimator.GetBool(IS_ATTACKING) && !enemyAnimator.GetBool(WILL_DIE))
             {
                 isRunning = true;
                 directionToRun = (player.transform.position - transform.position).normalized;
-                enemyRigidBody.velocity = directionToRun * Time.deltaTime * enemyRunningSpeed * 25;
+                enemyRigidBody.velocity = directionToRun * Time.deltaTime * enemyRunningSpeed * 30;
                 if (directionToRun.x < 0)
                     enemySprite.flipX = true;
                 else
                     enemySprite.flipX = false;
             }
-            else if (!isAggroed)
+            else if (!isAggroed || enemyAnimator.GetBool(WILL_DIE))
             {
                 isRunning = false;
             }
@@ -82,7 +83,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
 
     private void WalkingMovement()
     {
-        if (!enemyAnimator.GetBool(IS_ATTACKING) && !enemyAnimator.GetBool(IS_RUNNING))
+        if (!enemyAnimator.GetBool(IS_ATTACKING) && !enemyAnimator.GetBool(IS_RUNNING) && !enemyAnimator.GetBool(WILL_DIE))
         {
             enemyRigidBody.constraints = RigidbodyConstraints2D.None;
             enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -120,7 +121,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
                 }
             }
         }
-        else if(!enemyAnimator.GetBool(IS_RUNNING))
+        else if(!enemyAnimator.GetBool(IS_RUNNING) || enemyAnimator.GetBool(WILL_DIE))
         {
             enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
         }

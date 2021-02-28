@@ -9,7 +9,7 @@ public class ArcherPlayerController : MonoBehaviour
     [SerializeField] float runSpeed = 5f;
     [SerializeField] Transform aim;
     [SerializeField] GameObject arrow;
-    [Range(0f, 1f)] [SerializeField] float attackSpeed;
+    [Range(0f, 2f)] [SerializeField] float attackSpeed;
 
     // State
     public bool isAlive = true;
@@ -44,6 +44,7 @@ public class ArcherPlayerController : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
         myCollider = GetComponent<CapsuleCollider2D>();
+        myAnimator.SetFloat(ATTACKING_SPEED, attackSpeed);
     }
 
     // Update is called once per frame

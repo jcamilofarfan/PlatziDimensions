@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +17,7 @@ public class DamagePlayer : MonoBehaviour
     // Initialize variables
     float attackingDistance = 0;
     float currentDistance;
+    int damageDone;
     Vector2 enemyPosition;
     Vector2 playerPosition;
 
@@ -49,8 +49,8 @@ public class DamagePlayer : MonoBehaviour
     {
         if (otherCollider.CompareTag("Player") && this.CompareTag("ObjectThrown"))
         {
+            damageDone = Random.Range(damage - 2, damage + 3);
             playerAnimator.SetTrigger(PLAYER_HIT);
-
             playerHealth.DealDamage(damage);
             var clone = (GameObject)Instantiate(damageNumber, otherCollider.transform.position + new Vector3(2.5f,0.7f,0), Quaternion.identity);
             clone.GetComponent<DamageNumber>().damagePoints = damage;
