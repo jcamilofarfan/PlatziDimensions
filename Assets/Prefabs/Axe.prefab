@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7464811975028865291}
   m_Layer: 0
   m_Name: Axe
-  m_TagString: ThrownWeapon
+  m_TagString: ObjectThrown
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,5 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2be8738168bfbc48b3a1e755796ed43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
   damageNumber: {fileID: 7495074109800890106, guid: 3a70126d84cf0fc4f838edfcc1026a28, type: 3}
+  damage: 10

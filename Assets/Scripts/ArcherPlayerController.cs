@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherController : MonoBehaviour
+public class ArcherPlayerController : MonoBehaviour
 {
     // Config
     [SerializeField] Camera cameraX;
     [SerializeField] float runSpeed = 5f;
     [SerializeField] Transform aim;
     [SerializeField] GameObject arrow;
-    [Range(0f, 1f)] [SerializeField] float attackSpeed;
+    [Range(0f, 2f)] [SerializeField] float attackSpeed;
 
     // State
     public bool isAlive = true;
@@ -26,6 +26,7 @@ public class ArcherController : MonoBehaviour
     private const string WALKING_STATE = "isWalking";
     private const string ATTACKING_STATE = "isAttacking";
     private const string ATTACKING_SPEED = "AttackSpeed";
+    private const string IS_ALIVE = "isAlive";
 
     // Initialize variables
     float xDirection;
@@ -43,6 +44,7 @@ public class ArcherController : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         mySprite = GetComponent<SpriteRenderer>();
         myCollider = GetComponent<CapsuleCollider2D>();
+        myAnimator.SetFloat(ATTACKING_SPEED, attackSpeed);
     }
 
     // Update is called once per frame
@@ -51,15 +53,14 @@ public class ArcherController : MonoBehaviour
         if (!isAlive) { return; }
         Aim();
         Move();
-        myAnimator.SetFloat(ATTACKING_SPEED, attackSpeed);
     }
 
     private void Move()
     {
         xDirection = Input.GetAxis(HORIZONTAL);
         yDirection = Input.GetAxis(VERTICAL);
-        playerVelocity = new Vector2(xDirection * runSpeed, yDirection * runSpeed);
-        myRigidBody.velocity = playerVelocity;
+        playerVelocity = new Vector2(xDirection, yDirection);
+        myRigidBody.velocity = playerVelocity.normalized * runSpeed;
 
         playerIsWalking = Mathf.Abs(myRigidBody.velocity.x) > Mathf.Epsilon || Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon;
         myAnimator.SetBool(WALKING_STATE, playerIsWalking);
@@ -130,8 +131,13 @@ public class ArcherController : MonoBehaviour
 
     public void PlayerDied()
     {
-        isAlive = false;
         mySprite.enabled = false;
         myCollider.enabled = false;
+        Destroy(gameObject);
+    }
+
+    public void PlayerFalling()
+    {
+        isAlive = false;
     }
 }

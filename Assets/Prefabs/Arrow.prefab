@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8640600757249624089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.028, y: 0.088, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 1.8, z: 1.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -113,5 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 10
-  damage: 10
+  damage: 20
   freezer: 0
+  damageNumber: {fileID: 7495074109800890106, guid: 7c5bb284c39c7ce4790df9a569235b3f, type: 3}
+  damageNumberCrit: {fileID: 7495074109800890106, guid: cbfe6d25c1497ee4ebcf157106eb60cc, type: 3}

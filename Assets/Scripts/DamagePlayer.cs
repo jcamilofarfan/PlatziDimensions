@@ -8,25 +8,103 @@ public class DamagePlayer : MonoBehaviour
     [SerializeField] GameObject damageNumber;
     public int damage = 10;
 
+    // Cached component references
+    GameObject player;
+    Animator playerAnimator, enemyAnimator;
+    HealthManager playerHealth;
+    SpriteRenderer enemySprite;
+
+    // Initialize variables
+    float attackingDistance = 0;
+    float currentDistance;
+    int damageDone;
+    Vector2 enemyPosition;
+    Vector2 playerPosition;
+
     // String const
-    private const string THROWN_WEAPON = "ThrownWeapon";
+    private const string PLAYER_HIT = "playerHit";
+    private const string IS_ATTACKING = "isAttacking";
 
-    private void OnTriggerEnter2D(Collider2D otherCollider)
+    // Start is called before the first frame update
+    private void Start()
     {
-        var health = otherCollider.GetComponent<HealthManager>();
-        if (otherCollider.tag == "Player")
+        try
         {
-            Animator otherAnim = otherCollider.GetComponent<Animator>();
-            otherAnim.SetTrigger("playerHit");
+            player = FindObjectOfType<ArcherPlayerController>().gameObject;
+            playerAnimator = player.GetComponent<Animator>();
+            playerHealth = player.GetComponent<HealthManager>();
+            enemySprite = GetComponent<SpriteRenderer>();
 
-            health.DealDamage(damage);
+            if (gameObject.CompareTag("Enemy")) { enemyAnimator = GetComponent<Animator>(); }
+        }
+        catch{ return; }
+    }
+
+    private void Update()
+    {      
+        StopAttacking();
+    }
+
+    private void OnTriggerEnter2D(Collider2D otherCollider) //This only applies for the thrown weapons
+    {
+        if (otherCollider.CompareTag("Player") && this.CompareTag("ObjectThrown"))
+        {
+            damageDone = Random.Range((int)((float)damage * 0.8f), (int)((float)damage * 1.2f));
+            playerAnimator.SetTrigger(PLAYER_HIT);
+            playerHealth.DealDamage(damageDone);
             var clone = (GameObject)Instantiate(damageNumber, otherCollider.transform.position + new Vector3(2.5f,0.7f,0), Quaternion.identity);
-            clone.GetComponent<DamageNumber>().damagePoints = damage;
+            clone.GetComponent<DamageNumber>().damagePoints = damageDone;
             
-            if (gameObject.CompareTag(THROWN_WEAPON))
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            enemyAnimator.SetBool(IS_ATTACKING, true);
+            enemyPosition = new Vector2(transform.position.x, transform.position.y);
+            playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+            
+            if (enemyPosition.x > playerPosition.x)
+                enemySprite.flipX = true;
+            else
+                enemySprite.flipX = false;
+
+            attackingDistance = Vector2.Distance(enemyPosition, playerPosition);
+        }
+    }
+
+    private void StopAttacking()
+    {
+        if (gameObject.CompareTag("Enemy"))
+        {
+            if (enemyAnimator.GetBool(IS_ATTACKING))
             {
-                Destroy(gameObject);
+                enemyPosition = new Vector2(transform.position.x, transform.position.y);
+                playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
+                currentDistance = Vector2.Distance(enemyPosition, playerPosition);
+
+                if (currentDistance > attackingDistance * 2f)
+                {
+                    enemyAnimator.SetBool(IS_ATTACKING, false);
+                }
+
+                if (!player.GetComponent<ArcherPlayerController>().isAlive)
+                {
+                    enemyAnimator.SetBool(IS_ATTACKING, false);
+                }
             }
         }
+    }
+
+    public void DealDamageToPlayer()
+    {
+        damageDone = Random.Range((int)((float)damage * 0.8f), (int)((float)damage * 1.2f));
+        playerHealth.DealDamage(damageDone);
+        playerAnimator.SetTrigger(PLAYER_HIT);
+        var clone = (GameObject)Instantiate(damageNumber, player.transform.position + new Vector3(2.5f, 0.7f, 0), Quaternion.identity);
+        clone.GetComponent<DamageNumber>().damagePoints = damageDone;
     }
 }

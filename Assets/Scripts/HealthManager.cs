@@ -10,12 +10,12 @@ public class HealthManager : MonoBehaviour
     // Initialize variables
     private int currentHealth;
     Animator anim;
-    ArcherController archer;
 
     // String const
     private const string WILL_DIE_TRIGGER = "willDieTrigger";
     private const string WILL_DIE = "willDie";
 
+    // Start is called before the first frame update
     private void Start()
     {
         anim = GetComponent<Animator>();
