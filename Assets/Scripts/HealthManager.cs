@@ -10,7 +10,7 @@ public class HealthManager : MonoBehaviour
     // Initialize variables
     private int currentHealth;
     Animator anim;
-    ArcherController archer;
+    ArcherPlayerController archer;
 
     // String const
     private const string WILL_DIE_TRIGGER = "willDieTrigger";

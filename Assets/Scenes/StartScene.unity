@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 501900059}
   - component: {fileID: 501900058}
   - component: {fileID: 501900060}
+  - component: {fileID: 501900061}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Enemy
@@ -315,7 +316,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 501900054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.96, y: -0, z: 0}
+  m_LocalPosition: {x: -15.64, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -360,7 +361,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 4
 --- !u!70 &501900059
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -391,6 +392,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageNumber: {fileID: 7495074109800890106, guid: 3a70126d84cf0fc4f838edfcc1026a28, type: 3}
   damage: 10
+--- !u!114 &501900061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501900054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aedde8ac03fbb9243af0b58d8a0842e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpeed: 2
+  timeBetweenSteps: 2
+  timeToMakeStep: 2
 --- !u!20 &519420031 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4464349381766075963, guid: 44ff944c0c8b0524c8954febe0d1d7f8, type: 3}
@@ -26908,11 +26924,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7580161651641229983, guid: 84853a1920f638e4dab30c5136a2b139, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3
+      value: 11.63
       objectReference: {fileID: 0}
     - target: {fileID: 7580161651641229983, guid: 84853a1920f638e4dab30c5136a2b139, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.18
+      value: -6.18
       objectReference: {fileID: 0}
     - target: {fileID: 7580161651641229983, guid: 84853a1920f638e4dab30c5136a2b139, type: 3}
       propertyPath: m_LocalPosition.z

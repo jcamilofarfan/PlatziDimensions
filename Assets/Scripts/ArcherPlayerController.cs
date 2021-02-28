@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherController : MonoBehaviour
+public class ArcherPlayerController : MonoBehaviour
 {
     // Config
     [SerializeField] Camera cameraX;
@@ -52,7 +52,6 @@ public class ArcherController : MonoBehaviour
         if (!isAlive) { return; }
         Aim();
         Move();
-        myAnimator.SetFloat(ATTACKING_SPEED, attackSpeed);
     }
 
     private void Move()
