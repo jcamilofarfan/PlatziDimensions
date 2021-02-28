@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSpeed: 10
-  damage: 10
+  damage: 20
   freezer: 0
   damageNumber: {fileID: 7495074109800890106, guid: 7c5bb284c39c7ce4790df9a569235b3f, type: 3}
+  damageNumberCrit: {fileID: 7495074109800890106, guid: cbfe6d25c1497ee4ebcf157106eb60cc, type: 3}

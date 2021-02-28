@@ -49,11 +49,11 @@ public class DamagePlayer : MonoBehaviour
     {
         if (otherCollider.CompareTag("Player") && this.CompareTag("ObjectThrown"))
         {
-            damageDone = Random.Range(damage - 2, damage + 3);
+            damageDone = Random.Range((int)((float)damage * 0.8f), (int)((float)damage * 1.2f));
             playerAnimator.SetTrigger(PLAYER_HIT);
-            playerHealth.DealDamage(damage);
+            playerHealth.DealDamage(damageDone);
             var clone = (GameObject)Instantiate(damageNumber, otherCollider.transform.position + new Vector3(2.5f,0.7f,0), Quaternion.identity);
-            clone.GetComponent<DamageNumber>().damagePoints = damage;
+            clone.GetComponent<DamageNumber>().damagePoints = damageDone;
             
             Destroy(gameObject);
         }
@@ -101,9 +101,10 @@ public class DamagePlayer : MonoBehaviour
 
     public void DealDamageToPlayer()
     {
-        playerHealth.DealDamage(damage);
+        damageDone = Random.Range((int)((float)damage * 0.8f), (int)((float)damage * 1.2f));
+        playerHealth.DealDamage(damageDone);
         playerAnimator.SetTrigger(PLAYER_HIT);
         var clone = (GameObject)Instantiate(damageNumber, player.transform.position + new Vector3(2.5f, 0.7f, 0), Quaternion.identity);
-        clone.GetComponent<DamageNumber>().damagePoints = damage;
+        clone.GetComponent<DamageNumber>().damagePoints = damageDone;
     }
 }

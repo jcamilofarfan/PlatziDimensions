@@ -6,9 +6,11 @@ public class Arrow : MonoBehaviour
 {
     // Config
     [Range(10f, 15f)] [SerializeField] float currentSpeed = 10f;
+    [Range(0f, 100f)] [SerializeField] int critChance = 20;
     [SerializeField] int damage = 10;
     [SerializeField] bool freezer = false;
     [SerializeField] GameObject damageNumber;
+    [SerializeField] GameObject damageNumberCrit;
 
     // Initialize variables
     int damageDone;
@@ -33,7 +35,19 @@ public class Arrow : MonoBehaviour
 
             if (otherCollider.CompareTag("Enemy") && !otherCollider.isTrigger)
             {
-                damageDone = Random.Range(damage - 2, damage + 3);
+                damageDone = Random.Range((int)((float)damage*0.8f), (int)((float)damage*1.2f));
+
+                if (Random.Range(1, 101) <= critChance)
+                {
+                    damageDone *= 2;
+                    enemyHealth.DealDamage(damageDone);
+                    var cloneCrit = (GameObject)Instantiate(damageNumberCrit, otherCollider.transform.position + new Vector3(2.5f, 0.7f, 0), Quaternion.identity);
+                    cloneCrit.GetComponent<DamageNumber>().damagePoints = damageDone;
+                    otherCollider.GetComponent<WarriorEnemyMovementController>().isAggroed = true;
+                    Destroy(gameObject);
+                    return;
+                }
+
                 enemyHealth.DealDamage(damageDone);       
                 var clone = (GameObject)Instantiate(damageNumber, otherCollider.transform.position + new Vector3(2.5f, 0.7f, 0), Quaternion.identity);
                 clone.GetComponent<DamageNumber>().damagePoints = damageDone;

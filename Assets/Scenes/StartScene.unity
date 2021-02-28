@@ -27256,6 +27256,10 @@ PrefabInstance:
       propertyPath: cameraX
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 7580161651641229969, guid: 84853a1920f638e4dab30c5136a2b139, type: 3}
+      propertyPath: attackSpeed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7580161651641229981, guid: 84853a1920f638e4dab30c5136a2b139, type: 3}
       propertyPath: m_Name
       value: Archer
