@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 501900058}
   - component: {fileID: 501900060}
   - component: {fileID: 501900061}
+  - component: {fileID: 501900062}
   m_Layer: 0
   m_Name: Warrior
   m_TagString: Enemy
@@ -409,6 +410,22 @@ MonoBehaviour:
   timeBetweenSteps: 2
   timeToMakeStep: 2
   isAggroed: 0
+--- !u!58 &501900062
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501900054}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 12
 --- !u!20 &519420031 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4464349381766075963, guid: 44ff944c0c8b0524c8954febe0d1d7f8, type: 3}

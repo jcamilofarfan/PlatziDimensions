@@ -11,9 +11,9 @@ public class WarriorEnemyMovementController : MonoBehaviour
     [SerializeField] float timeToMakeStep;
 
     // State
-    private bool isMoving;
-    private bool isRunning;
-    public bool isAggroed;
+    bool isMoving;
+    bool isRunning;
+    bool isAggroed;
 
     // Cached component references
     Rigidbody2D enemyRigidBody;
@@ -60,20 +60,24 @@ public class WarriorEnemyMovementController : MonoBehaviour
 
     private void RunningMovement()
     {
-        if (isAggroed && !enemyAnimator.GetBool(IS_ATTACKING))
+        try
         {
-            isRunning = true;
-            directionToRun = (player.transform.position - transform.position).normalized;
-            enemyRigidBody.velocity = directionToRun * Time.deltaTime * enemyRunningSpeed * 30;
-            if (directionToRun.x < 0)
-                enemySprite.flipX = true;
-            else
-                enemySprite.flipX = false;     
+            if (isAggroed && !enemyAnimator.GetBool(IS_ATTACKING))
+            {
+                isRunning = true;
+                directionToRun = (player.transform.position - transform.position).normalized;
+                enemyRigidBody.velocity = directionToRun * Time.deltaTime * enemyRunningSpeed * 25;
+                if (directionToRun.x < 0)
+                    enemySprite.flipX = true;
+                else
+                    enemySprite.flipX = false;
+            }
+            else if (!isAggroed)
+            {
+                isRunning = false;
+            }
         }
-        else if (!isAggroed)
-        {
-            isRunning = false;
-        }        
+        catch { isRunning = false; return; }    
     }
 
     private void WalkingMovement()
@@ -119,6 +123,22 @@ public class WarriorEnemyMovementController : MonoBehaviour
         else if(!enemyAnimator.GetBool(IS_RUNNING))
         {
             enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isAggroed = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            isAggroed = false;
         }
     }
 }
