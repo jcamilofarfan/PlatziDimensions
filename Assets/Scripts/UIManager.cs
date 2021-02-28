@@ -5,9 +5,16 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    // Config
     [SerializeField] Slider playerHealthBar;
     [SerializeField] Text playerHealthText;
     [SerializeField] HealthManager playerHealthManager;
+    [SerializeField] Text coins;
+
+    private void Start()
+    {
+        UpdateNumberOfCoins();
+    }
 
     // Update is called once per frame
     void Update()
@@ -22,4 +29,11 @@ public class UIManager : MonoBehaviour
 
         playerHealthText.text = "HP: " + playerHealthBar.value + "/" + playerHealthBar.maxValue;
     }
+
+    public void UpdateNumberOfCoins()
+    {
+
+    }
+
+
 }

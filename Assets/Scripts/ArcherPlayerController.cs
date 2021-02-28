@@ -36,6 +36,7 @@ public class ArcherPlayerController : MonoBehaviour
     bool playerIsWalking;
     bool arrowReady = true;
     GameObject arrowShot;
+    public static bool playerCreated;
 
     // Start is called before the first frame update
     void Start()
@@ -122,13 +123,6 @@ public class ArcherPlayerController : MonoBehaviour
         arrowReady = true;
     }
 
-    public void IncreaseAttackSpeed()
-    {
-        if (attackSpeed < 1)
-            attackSpeed += 0.1f;
-        myAnimator.SetFloat(ATTACKING_SPEED, attackSpeed);
-    }
-
     public void PlayerDied()
     {
         mySprite.enabled = false;
@@ -140,4 +134,16 @@ public class ArcherPlayerController : MonoBehaviour
     {
         isAlive = false;
     }
+
+    public void IncreaseAttackSpeed()
+    {
+        if (attackSpeed < 1)
+            attackSpeed += 0.1f;
+        myAnimator.SetFloat(ATTACKING_SPEED, attackSpeed);
+    }
+
+    public void UpdateRunSpeed(float newRunSpeed) { runSpeed = newRunSpeed; }
+    public void UpdateAttackSpeed(float newAttackSpeed) { attackSpeed = newAttackSpeed; }
+
+
 }
