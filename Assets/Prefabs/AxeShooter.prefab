@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1632583081335344520}
   - component: {fileID: 1632583081335344527}
   m_Layer: 0
-  m_Name: ArrowShooter
+  m_Name: AxeShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,4 +43,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac4eb147e65cfb48a359e6a8a2ae963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 8640600757249624089, guid: a5f02b4df0ca1594a8ea838235331adb, type: 3}
+  arrow: {fileID: 5960261009339365014, guid: 90d1301686b53e64a8dbb4d6f5a8e326, type: 3}

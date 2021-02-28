@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour
 {
     [Range(10f, 15f)] [SerializeField] float currentSpeed = 10f;
-    [SerializeField] float damage = 50f;
+    [SerializeField] int damage = 10;
     [SerializeField] bool freezer = false;
 
     private void Start()
@@ -18,17 +18,17 @@ public class Arrow : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * currentSpeed;
     }
 
-    //private void OnTriggerEnter2D(Collider2D otherCollider)
-    //{
-    //    var health = otherCollider.GetComponent<Health>();
-    //    var enemy = otherCollider.GetComponent<Enemy>();
+    private void OnTriggerEnter2D(Collider2D otherCollider)
+    {
+        var health = otherCollider.GetComponent<HealthManager>();
+        //var enemy = otherCollider.GetComponent<Enemy>();
 
-    //    if (otherCollider.tag == "Enemy")
-    //    {
-    //        health.DealDamage(damage);
-    //        Destroy(gameObject);
-    //        if (freezer)
-    //            Freeze(attacker);
-    //    }
-    //}
+        if (otherCollider.tag == "Enemy")
+        {
+            health.DealDamage(damage);
+            Destroy(gameObject);
+            //if (freezer)
+            //    Freeze(attacker);
+        }
+    }
 }

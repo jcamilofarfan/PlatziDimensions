@@ -81,8 +81,10 @@
 - Damage dealt numbers
 
 ## Enemie
-- Move randomly
-- 
+- Move randomly with animation
+- Area of Agro
+- Attack with animations
+- Bloque randomly with animation
 
 # Visual Style
 Not defined yet
