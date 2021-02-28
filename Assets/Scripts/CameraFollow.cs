@@ -15,6 +15,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (followTarget == null) { return; }
         targetPosition = new Vector3(followTarget.transform.position.x, 
                                      followTarget.transform.position.y, -10);
         this.transform.position = Vector3.Lerp(this.transform.position, 

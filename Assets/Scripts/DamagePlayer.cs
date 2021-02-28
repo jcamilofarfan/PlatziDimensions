@@ -24,15 +24,19 @@ public class DamagePlayer : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<ArcherController>().gameObject;
-        playerAnimator = player.GetComponent<Animator>();
-        health = player.GetComponent<HealthManager>();
-        if (gameObject.CompareTag("Enemy")) { enemyAnimator = GetComponent<Animator>(); }
+        try
+        {
+            player = FindObjectOfType<ArcherController>().gameObject;
+            playerAnimator = player.GetComponent<Animator>();
+            health = player.GetComponent<HealthManager>();
+            if (gameObject.CompareTag("Enemy")) { enemyAnimator = GetComponent<Animator>(); }
+        }
+        catch{ return; }
     }
 
     private void Update()
-    {
-        OutOfRange();
+    {      
+        StopAttacking();
     }
 
     private void OnTriggerEnter2D(Collider2D otherCollider) //This only applies for the thrown weapons
@@ -60,7 +64,7 @@ public class DamagePlayer : MonoBehaviour
         }
     }
 
-    private void OutOfRange()
+    private void StopAttacking()
     {
         if (gameObject.CompareTag("Enemy"))
         {
@@ -73,8 +77,11 @@ public class DamagePlayer : MonoBehaviour
                 if (currentDistance > attackingDistance * 2f)
                 {
                     enemyAnimator.SetBool(ATTACK, false);
-                    Debug.Log(currentDistance);
-                    Debug.Log(attackingDistance);
+                }
+
+                if (!player.GetComponent<ArcherController>().isAlive)
+                {
+                    enemyAnimator.SetBool(ATTACK, false);
                 }
             }
         }

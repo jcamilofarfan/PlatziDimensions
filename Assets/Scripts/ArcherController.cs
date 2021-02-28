@@ -26,6 +26,7 @@ public class ArcherController : MonoBehaviour
     private const string WALKING_STATE = "isWalking";
     private const string ATTACKING_STATE = "isAttacking";
     private const string ATTACKING_SPEED = "AttackSpeed";
+    private const string IS_ALIVE = "isAlive";
 
     // Initialize variables
     float xDirection;
@@ -130,8 +131,13 @@ public class ArcherController : MonoBehaviour
 
     public void PlayerDied()
     {
-        isAlive = false;
         mySprite.enabled = false;
         myCollider.enabled = false;
+        Destroy(gameObject);
+    }
+
+    public void PlayerFalling()
+    {
+        isAlive = false;
     }
 }
