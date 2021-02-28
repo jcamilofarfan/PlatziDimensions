@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowShooter : MonoBehaviour
+public class AxeShooter : MonoBehaviour
 {
-    [SerializeField] GameObject arrow;
+    [SerializeField] GameObject axe;
     bool arrowReady = true;
     GameObject arrowShot;
 
@@ -18,7 +18,7 @@ public class ArrowShooter : MonoBehaviour
     public void Fire()
     {
         arrowReady = false;
-        arrowShot = Instantiate(arrow, this.transform.position, Quaternion.identity);
+        arrowShot = Instantiate(axe, this.transform.position, Quaternion.identity);
         arrowShot.transform.parent = this.transform;
 
         StartCoroutine(WaitForNextShot());
