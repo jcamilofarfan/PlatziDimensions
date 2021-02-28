@@ -10,9 +10,11 @@ public class HealthManager : MonoBehaviour
     // Initialize variables
     private int currentHealth;
     Animator anim;
+    ArcherController archer;
 
     // String const
-    private const string willDie = "willDie";
+    private const string WILL_DIE_TRIGGER = "willDieTrigger";
+    private const string WILL_DIE = "willDie";
 
     private void Start()
     {
@@ -25,7 +27,8 @@ public class HealthManager : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            anim.SetTrigger("willDie"); 
+            anim.SetBool(WILL_DIE, true);
+            anim.SetTrigger(WILL_DIE_TRIGGER);
         }
     }
 
