@@ -8,7 +8,6 @@ public class Arrow : MonoBehaviour
     [Range(10f, 15f)] [SerializeField] float currentSpeed = 10f;
     [Range(0f, 100f)] [SerializeField] int critChance = 20;
     [SerializeField] int damage = 10;
-    [SerializeField] bool freezer = false;
     [SerializeField] GameObject damageNumber;
     [SerializeField] GameObject damageNumberCrit;
 
@@ -53,8 +52,6 @@ public class Arrow : MonoBehaviour
                 clone.GetComponent<DamageNumber>().damagePoints = damageDone;
                 otherCollider.GetComponent<WarriorEnemyMovementController>().isAggroed = true;
                 Destroy(gameObject);
-                //if (freezer)
-                //    Freeze(attacker);
             }
 
             if (otherCollider.CompareTag("ForeGround"))
