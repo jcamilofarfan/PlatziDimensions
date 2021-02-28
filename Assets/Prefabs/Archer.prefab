@@ -239,10 +239,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraX: {fileID: 0}
-  runSpeed: 5
+  runSpeed: 6
   aim: {fileID: 7580161650395889688}
   arrow: {fileID: 8640600757249624089, guid: a5f02b4df0ca1594a8ea838235331adb, type: 3}
-  attackSpeed: 0
+  attackSpeed: 2
   isAlive: 1
 --- !u!114 &7580161651641229970
 MonoBehaviour:

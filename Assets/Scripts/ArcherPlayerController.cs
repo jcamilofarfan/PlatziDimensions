@@ -59,8 +59,8 @@ public class ArcherPlayerController : MonoBehaviour
     {
         xDirection = Input.GetAxis(HORIZONTAL);
         yDirection = Input.GetAxis(VERTICAL);
-        playerVelocity = new Vector2(xDirection * runSpeed, yDirection * runSpeed);
-        myRigidBody.velocity = playerVelocity;
+        playerVelocity = new Vector2(xDirection, yDirection);
+        myRigidBody.velocity = playerVelocity.normalized * runSpeed;
 
         playerIsWalking = Mathf.Abs(myRigidBody.velocity.x) > Mathf.Epsilon || Mathf.Abs(myRigidBody.velocity.y) > Mathf.Epsilon;
         myAnimator.SetBool(WALKING_STATE, playerIsWalking);

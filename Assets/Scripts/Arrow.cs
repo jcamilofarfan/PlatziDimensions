@@ -34,9 +34,10 @@ public class Arrow : MonoBehaviour
             if (otherCollider.CompareTag("Enemy") && !otherCollider.isTrigger)
             {
                 damageDone = Random.Range(damage - 2, damage + 3);
-                enemyHealth.DealDamage(damageDone);
+                enemyHealth.DealDamage(damageDone);       
                 var clone = (GameObject)Instantiate(damageNumber, otherCollider.transform.position + new Vector3(2.5f, 0.7f, 0), Quaternion.identity);
                 clone.GetComponent<DamageNumber>().damagePoints = damageDone;
+                otherCollider.GetComponent<WarriorEnemyMovementController>().isAggroed = true;
                 Destroy(gameObject);
                 //if (freezer)
                 //    Freeze(attacker);

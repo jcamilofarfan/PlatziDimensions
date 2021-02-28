@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class WarriorEnemyMovementController : MonoBehaviour
 {
+    public Vector2 velocity;
+    public float velocityMagnitude;
     // Config
-    [Range(2f, 3f)] [SerializeField] float enemyWalkingSpeed = 2;
-    [Range(4f, 5f)] [SerializeField] float enemyRunningSpeed = 4;
+    [Range(2f, 3f)] [SerializeField] float enemyWalkingSpeed;
+    [Range(3f, 4f)] [SerializeField] float enemyRunningSpeed;
     [SerializeField] float timeBetweenSteps;
     [SerializeField] float timeToMakeStep;
+    [SerializeField] GameObject enemyHealthBar;
 
     // State
     bool isMoving;
     bool isRunning;
-    bool isAggroed;
+    public bool isAggroed;
 
     // Cached component references
     Rigidbody2D enemyRigidBody;
@@ -26,6 +29,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
     float timeToMakeStepCounter;
     Vector2 directionToMakeStep;
     Vector2 directionToRun;
+    public bool healthBarCreated;
 
     // String const
     private const string IS_MOVING = "isMoving";
@@ -51,6 +55,24 @@ public class WarriorEnemyMovementController : MonoBehaviour
         WalkingMovement();
         RunningMovement();
         AnimationChanges();
+        EnemyHealthBar();
+        velocity = enemyRigidBody.velocity;
+        velocityMagnitude = velocity.magnitude;
+    }
+
+    private void EnemyHealthBar()
+    {
+        if (isAggroed && !healthBarCreated)
+        {
+            healthBarCreated = true;
+            var healthBar = (GameObject)Instantiate(enemyHealthBar, transform.position + new Vector3(0, 1.3f, 0), Quaternion.identity);
+            healthBar.transform.SetParent(this.transform, true);
+        }
+        else if (!isAggroed && healthBarCreated)
+        {
+            Destroy(GetComponentInChildren<EnemyHealthBar>().gameObject);
+            healthBarCreated = false;
+        }
     }
 
     private void AnimationChanges()
@@ -66,8 +88,8 @@ public class WarriorEnemyMovementController : MonoBehaviour
             if (isAggroed && !enemyAnimator.GetBool(IS_ATTACKING) && !enemyAnimator.GetBool(WILL_DIE))
             {
                 isRunning = true;
-                directionToRun = (player.transform.position - transform.position).normalized;
-                enemyRigidBody.velocity = directionToRun * Time.deltaTime * enemyRunningSpeed * 30;
+                directionToRun = player.transform.position - transform.position;
+                enemyRigidBody.velocity = directionToRun.normalized * enemyRunningSpeed;
                 if (directionToRun.x < 0)
                     enemySprite.flipX = true;
                 else
@@ -96,7 +118,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
                 else
                     enemySprite.flipX = false;
 
-                enemyRigidBody.velocity = directionToMakeStep;
+                enemyRigidBody.velocity = directionToMakeStep.normalized * enemyWalkingSpeed;
 
                 if (timeToMakeStepCounter < 0)
                 {
@@ -115,7 +137,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
 
                     do
                     {
-                        directionToMakeStep = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2)) * enemyWalkingSpeed;
+                        directionToMakeStep = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
                     }
                     while (directionToMakeStep == Vector2.zero);
                 }

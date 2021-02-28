@@ -12,10 +12,10 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HealthBar();
+        PlayerHealthBar();
     }
 
-    private void HealthBar()
+    private void PlayerHealthBar()
     {
         playerHealthBar.maxValue = playerHealthManager.GetMaxHealth();
         playerHealthBar.value = playerHealthManager.GetCurrentHealth();
