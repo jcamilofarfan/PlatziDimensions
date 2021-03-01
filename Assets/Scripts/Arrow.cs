@@ -61,4 +61,7 @@ public class Arrow : MonoBehaviour
         }
         catch { return; }
     }
+
+    public void UpdateDamage(int newDamage){damage = newDamage;}
+    public void UpdateCritChance(int newCrit) { critChance = newCrit; }
 }

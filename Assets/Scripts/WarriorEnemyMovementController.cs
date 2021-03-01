@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WarriorEnemyMovementController : MonoBehaviour
 {
-    public Vector2 velocity;
-    public float velocityMagnitude;
     // Config
     [Range(2f, 3f)] [SerializeField] float enemyWalkingSpeed;
     [Range(3f, 4f)] [SerializeField] float enemyRunningSpeed;
@@ -56,8 +54,21 @@ public class WarriorEnemyMovementController : MonoBehaviour
         RunningMovement();
         AnimationChanges();
         EnemyHealthBar();
-        velocity = enemyRigidBody.velocity;
-        velocityMagnitude = velocity.magnitude;
+        FreezeConstraints();
+    }
+
+    private void FreezeConstraints()
+    {
+        if (enemyAnimator.GetBool(IS_MOVING) || enemyAnimator.GetBool(IS_RUNNING))
+        {
+            enemyRigidBody.constraints = RigidbodyConstraints2D.None;
+            enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+        }
+
+        if (enemyAnimator.GetBool(IS_ATTACKING) || enemyAnimator.GetBool(WILL_DIE))
+        {
+            enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
+        }
     }
 
     private void EnemyHealthBar()
@@ -143,10 +154,7 @@ public class WarriorEnemyMovementController : MonoBehaviour
                 }
             }
         }
-        else if(!enemyAnimator.GetBool(IS_RUNNING) || enemyAnimator.GetBool(WILL_DIE))
-        {
-            enemyRigidBody.constraints = RigidbodyConstraints2D.FreezeAll;
-        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

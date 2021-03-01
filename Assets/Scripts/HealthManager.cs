@@ -37,12 +37,14 @@ public class HealthManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void UpDateMaxHealth(int newMaxHealth)
-    {
-        maxHealth = newMaxHealth;
-        currentHealth = maxHealth;
-    }
-
     public float GetCurrentHealth() { return currentHealth; }
     public float GetMaxHealth() { return maxHealth; }
+
+    public void UpDateMaxHealth(int newMaxHealth){maxHealth = newMaxHealth; currentHealth = maxHealth;}
+    public void HealCharacter(int healedAmount) 
+    { 
+        currentHealth += healedAmount;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
+    }
 }
