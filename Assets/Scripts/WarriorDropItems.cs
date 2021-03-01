@@ -13,7 +13,7 @@ public class WarriorDropItems : MonoBehaviour
 
     private void Start()
     {
-        values = new int[]{0,0,1,1,1,1,2,2,2,3};
+        values = new int[]{0,1,1,1,1,1,2,2,2,3};
     }
 
     public void DropItems()                   
