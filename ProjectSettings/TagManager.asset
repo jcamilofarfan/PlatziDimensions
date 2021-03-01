@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - ObjectThrown
-  - ForeGround
-  - Coin
-  - Potion
+  - SpawnPoint
+  - Rooms
   layers:
   - Default
   - TransparentFX
@@ -16,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
+  - 
   - 
   - 
   - 
@@ -60,9 +57,6 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1312254075
-    locked: 0
-  - name: Enemy
-    uniqueID: 2556121119
     locked: 0
   - name: UI
     uniqueID: 2648716701
