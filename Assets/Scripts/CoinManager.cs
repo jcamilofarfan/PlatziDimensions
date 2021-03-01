@@ -8,6 +8,7 @@ public class CoinManager : MonoBehaviour
     // Config
     public static CoinManager sharedInstance;
     [SerializeField] Text moneyText;
+    [SerializeField] bool restartCoins;
 
     // Initialize variables
     int currentGold;
@@ -36,6 +37,9 @@ public class CoinManager : MonoBehaviour
             PlayerPrefs.SetInt(goldkey, 0);
         }
         moneyText.text = currentGold.ToString();
+
+        if (restartCoins)
+            RestartCoins();
     }
 
     public void AddMoney(int moneyCollected)
@@ -45,5 +49,10 @@ public class CoinManager : MonoBehaviour
         moneyText.text = currentGold.ToString();
     }
 
-    public void RestartCoins() { PlayerPrefs.SetInt(goldkey, 0); }
+    public void RestartCoins() 
+    { 
+        PlayerPrefs.SetInt(goldkey, 0);
+        currentGold = PlayerPrefs.GetInt(goldkey);
+        moneyText.text = currentGold.ToString(); 
+    }
 }

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2479877493435221634}
   - component: {fileID: 2479877493435221632}
   - component: {fileID: 2479877493435221633}
+  - component: {fileID: 345280324}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Enemy
@@ -209,3 +210,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 12
+--- !u!114 &345280324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2479877493435221641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6754f1ead3072294bbe4e43b12cf1456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DropableItems:
+  - {fileID: 2444710229255741150, guid: cbbdff2618ab5ef4badcd235a9bcbc36, type: 3}
+  - {fileID: 2444710229255741150, guid: cbbdff2618ab5ef4badcd235a9bcbc36, type: 3}
+  - {fileID: 2444710229255741150, guid: cbbdff2618ab5ef4badcd235a9bcbc36, type: 3}
+  - {fileID: 2444710229255741150, guid: cbbdff2618ab5ef4badcd235a9bcbc36, type: 3}
+  - {fileID: 2444710229255741150, guid: cbbdff2618ab5ef4badcd235a9bcbc36, type: 3}
+  - {fileID: 2444710229255741150, guid: cbbdff2618ab5ef4badcd235a9bcbc36, type: 3}
+  - {fileID: 2444710229255741150, guid: cbbdff2618ab5ef4badcd235a9bcbc36, type: 3}
+  - {fileID: 7000904903027721705, guid: c13a6937d9dc36548bd8da1e3d9df342, type: 3}
+  - {fileID: 7000904903027721705, guid: c13a6937d9dc36548bd8da1e3d9df342, type: 3}
+  - {fileID: 7000904903027721705, guid: c13a6937d9dc36548bd8da1e3d9df342, type: 3}
