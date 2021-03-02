@@ -17,9 +17,14 @@ public class RoomSpawner : MonoBehaviour {
 
 	public float waitTime = 4f;
 
-	void Start(){
-		Destroy(gameObject, waitTime);
+    private void Awake()
+    {
 		templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+	}
+
+    void Start()
+	{
+		Destroy(gameObject, waitTime);
 		Invoke("Spawn", 0.1f);
 	}
 
