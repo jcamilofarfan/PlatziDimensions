@@ -9,11 +9,17 @@ TagManager:
   - ForeGround
   - Coin
   - Potion
+  - SpawnPoint
+  - Rooms
+  - RoomsCreate
+  - UI
+  - CanvasStart
+  - CanvasInGame
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Background
   - Water
   - UI
   - Enemy

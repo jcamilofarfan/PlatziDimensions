@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8377669602366434088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8377669602366434094}
+  - component: {fileID: 8377669602366434089}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8377669602366434094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8377669602366434088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8377669602366434089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8377669602366434088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4739efa080e1ef6458c9b11ba798180a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 2
+  rooms: 0
+  inGame: 0
+  enemys: []
+  player: {fileID: 0}
+  canvasStart: {fileID: 8876806972860426527, guid: ded1e02dae48b6c4983f85092ef9b2cb, type: 3}
+  animationStart: {fileID: 7824840549207480608, guid: 8415d3625285905468be3eb120792957, type: 3}
+  playerSpawn: {fileID: 6399951730365017127, guid: 5c595c0df6ab2804fa27e047330583b9, type: 3}
+  spawnRooms: {fileID: 1287201636600271541, guid: fdd298b81f1c32949b9af106c86e77ff, type: 3}
+  Rooms: {fileID: 4190364712699291717, guid: 510961985904b6c4a84b7207ba0ee68a, type: 3}
+  canvasingame: {fileID: 7568753184049063901, guid: 3369714433cd37d44a5602540458e2d2, type: 3}
+  currentGameState: 0
+  numberBackGround: 0
+  numberplayer: 0
+  levelPlayer: 0

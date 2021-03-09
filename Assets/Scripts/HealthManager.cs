@@ -1,50 +1,89 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthManager : MonoBehaviour
 {
-    // Config
-    [SerializeField] int maxHealth = 100;
 
-    // Initialize variables
-    private int currentHealth;
-    Animator anim;
+    public int maxHealth;
+    public int currentHealth;
 
-    // String const
-    private const string WILL_DIE_TRIGGER = "willDieTrigger";
-    private const string WILL_DIE = "willDie";
+    public bool flashActive;
+    public float flashLenght;
+    private float flashCounter;
+    public int expWhenDefeated;
+    private SpriteRenderer characterRenderer;
 
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
-        anim = GetComponent<Animator>();
         currentHealth = maxHealth;
+        characterRenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void DealDamage(int damage)
+    // Update is called once per frame
+    void Update()
     {
-        currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            anim.SetBool(WILL_DIE, true);
-            anim.SetTrigger(WILL_DIE_TRIGGER);
+            if (gameObject.tag.Equals("Enemy"))
+            {
+                Destroy(gameObject);
+                GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterStats>().AddExperience(expWhenDefeated);
+            }
+            else
+            {
+                gameObject.SetActive(false);
+                GameManager.shareInstance.currentGameState = GameState.playerDeath;
+            }
+
+            
+        }
+        if (flashActive)
+        {
+            flashCounter -= Time.deltaTime;
+            if (flashCounter> flashLenght * 0.66f)
+            {
+                ToggleColor(false);
+            }else if (flashCounter > flashLenght * 0.33f)
+            {
+                ToggleColor(true);
+            }else if (flashCounter > 0)
+            {
+                ToggleColor(false);
+            }
+            else
+            {
+                ToggleColor(true);
+                flashActive = false;
+            }
         }
     }
 
-    public void DissapearAttacker()
-    {     
-        Destroy(gameObject);
+    public void DamageCharacter(int damage)
+    {
+        currentHealth -= damage;
+        if (flashLenght > 0)
+        {
+            flashActive = true;
+            flashCounter = flashLenght;
+        }
     }
 
-    public float GetCurrentHealth() { return currentHealth; }
-    public float GetMaxHealth() { return maxHealth; }
-
-    public void UpDateMaxHealth(int newMaxHealth){maxHealth = newMaxHealth; currentHealth = maxHealth;}
-    public void HealCharacter(int healedAmount) 
-    { 
-        currentHealth += healedAmount;
-        if (currentHealth > maxHealth)
-            currentHealth = maxHealth;
+    public void UpdateMaxHealth(int newMaxHelath)
+    {
+        maxHealth = newMaxHelath;
+        currentHealth = maxHealth;
     }
+
+    private void ToggleColor(bool visible)
+    {
+        characterRenderer.color = new Color(
+            characterRenderer.color.r,
+            characterRenderer.color.g,
+            characterRenderer.color.b,
+            (visible ? 1.0f : 0.0f));
+    }
+
+
 }

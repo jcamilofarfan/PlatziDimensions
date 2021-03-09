@@ -9,7 +9,5 @@ public class Destroyer : MonoBehaviour {
         {
 			Destroy(other.gameObject);
 		}
-			
-		
 	}
 }

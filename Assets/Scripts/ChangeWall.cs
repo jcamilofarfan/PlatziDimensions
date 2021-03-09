@@ -5,16 +5,14 @@ using UnityEngine.UI;
 
 public class ChangeWall : MonoBehaviour
 {
-    public Image wall;
-    public int number;
-    // Start is called before the first frame update
+    public Sprite backgroundOne, backgroundTwo, backgroundThree, backgroundFour;
+    public GameManager numberBackground;
     void Start()
     {
-        wall = GameObject.Find("wall").GetComponent<Image>();
-
+        numberBackground = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        Invoke("changeBack", 0f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -22,25 +20,22 @@ public class ChangeWall : MonoBehaviour
 
     void changeBack()
     {
-        if (number == 1)
+        if (numberBackground.numberBackGround == 1)
         {
-            wall.sprite = Resources.Load<Sprite>("Sprites/Fondo 1");
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = backgroundOne;
         }
-        if (number == 2)
+        if (numberBackground.numberBackGround == 2)
         {
-            wall.sprite = Resources.Load<Sprite>("Sprites/Fondo 2");
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = backgroundTwo;
         }
-        if (number == 3)
+        if (numberBackground.numberBackGround == 3)
         {
-            wall.sprite = Resources.Load<Sprite>("Sprites/Fondo 3");
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = backgroundThree;
         }
-        if (number == 4)
+        if (numberBackground.numberBackGround == 4)
         {
-            wall.sprite = Resources.Load<Sprite>("Sprites/Fondo 5");
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = backgroundFour;
         }
-        if (number == 6)
-        {
-            wall.sprite = Resources.Load<Sprite>("Sprites/Fondo 6");
-        }
+
     }
 }
